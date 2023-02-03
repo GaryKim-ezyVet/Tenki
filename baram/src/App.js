@@ -1,5 +1,6 @@
 import './App.css';
 import React from 'react';
+import {useKeepAwake} from 'expo-keep-awake';
 
 function App() {
   return (
