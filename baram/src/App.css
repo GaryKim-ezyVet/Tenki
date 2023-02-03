@@ -28,6 +28,24 @@
   color: #61dafb;
 }
 
+refreshButton {
+  position: 'absolute';
+  bottom:0;
+  left:0;
+};
+
+mapButton {
+  position: 'absolute';
+  bottom:0;
+  left:0;
+};
+
+settingsButton {
+  position: 'absolute';
+  bottom:0;
+  left:0;
+};
+
 @keyframes App-logo-spin {
   from {
     transform: rotate(0deg);
