@@ -1,6 +1,18 @@
-import './App.css';
-import React from 'react';
-import {useKeepAwake} from 'expo-keep-awake';
+import './App.css'
+import * as React from 'react';
+import { Button, SafeAreaView, Text } from 'react-native';
+
+function MainScreen({navigation}){
+  return(
+    <SafeAreaView>
+      <Text>Welcome to Baram</Text> 
+      <Button title="Refresh" />
+      <Button title="Map" />
+      <Button title="Settings" />
+    </SafeAreaView>
+  )
+}
+
 
 function App() {
   return (
