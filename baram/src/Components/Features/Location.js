@@ -1,5 +1,5 @@
 //will have function here to export the location from API 
-//https://www.npmjs.com/package/react-native-weather-apihttps://www.npmjs.com/package/react-native-weather-api
+//https://www.npmjs.com/package/react-native-weather-api
 import * as React from 'react';
 import {
     StyleSheet,
@@ -12,7 +12,7 @@ import {
 export default function Location(){
     return (
       <View style = {styles.pageTitle} >
-        <text style={styles.title}>Welcome to Baram</text>
+        <Text style={styles.title}> Welcome to Baram </Text>
       </View>
     );
 }
