@@ -5,7 +5,7 @@ import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import Location from './Location';
 import MapScreen from './MapScreen';
 import SettingsScreen from './SettingsScreen';
-import Ionicons from 'react-native-vector-icons/Ionicons';
+import {Ionicons} from '@expo/vector-icons';
 
 const Tab = createBottomTabNavigator();
 
@@ -18,18 +18,19 @@ export default function MainScreen() {
               let iconName;
               //set icon based on Screen Name
               
-              //if the screen is Main
+              //if the focused screen is Main display the refresh icon to tell users they can refresh the location else cloud icon so they can 'reopen' the screen
               if (route.name === 'Main'){
                   iconName = focused
-                  ? 'ios-information-circle'
-                  : 'ios-information-circle-outline';
-              //if the screen is map
+                  ? 'ios-refresh'
+                  : 'ios-cloud';
+              
+              //if the screen is map display map icon regardless of focus 
               }else if (route.name === 'Map'){
-                iconName=focused ? 'ios-map' : 'ios-map';
+                iconName="md-map";
 
               //if the screen is settings
               }else if (route.name === 'Settings'){
-                iconName=focused ? 'ios-list' : 'ios-list-outline';
+                iconName="md-settings";
               }
 
               //set the configurations of the
