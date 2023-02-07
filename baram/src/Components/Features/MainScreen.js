@@ -12,7 +12,6 @@ const Tab = createBottomTabNavigator();
 export default function MainScreen() {
   return (
       <NavigationContainer>
-<<<<<<< HEAD
         <Tab.Navigator
           screenOptions = {({route}) => ({
             tabBarIcon: ({ focused, color, size}) => {
@@ -41,9 +40,6 @@ export default function MainScreen() {
             tabBarInactiveTintColor: 'gray',
           })}
         >
-=======
-        <Tab.Navigator>
->>>>>>> 82e23003839347f678a378c9448b5293737dd48d
           <Tab.Screen name='Main' component={Location} />
           <Tab.Screen name='Map' component={MapScreen} />
           <Tab.Screen name='Settings' component={SettingsScreen} />
