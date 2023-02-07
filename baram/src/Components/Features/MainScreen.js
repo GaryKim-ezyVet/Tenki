@@ -7,17 +7,15 @@ import MapScreen from './MapScreen';
 import SettingsScreen from './SettingsScreen';
 
 const Tab = createBottomTabNavigator();
+
 export default function MainScreen() {
   return (
-    <View>
-      <Text>Welcome to Baram</Text>
       <NavigationContainer>
         <Tab.Navigator>
-          <Tab.Screen name="Main" component={Location} />
-          <Tab.Screen name="Map" component={MapScreen} />
-          <Tab.Screen name="Settings" component={SettingsScreen} />
+          <Tab.Screen name='Main' component={Location} />
+          <Tab.Screen name='Map' component={MapScreen} />
+          <Tab.Screen name='Settings' component={SettingsScreen} />
         </Tab.Navigator>
       </NavigationContainer>
-    </View>
   );
 }
