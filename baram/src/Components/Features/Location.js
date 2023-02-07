@@ -7,12 +7,13 @@ import {
     View,
   } from 'react-native';
 
-
-//run the Location function onclick
+//first load location 
+//run the Location function onclick again in case they need to refresh the location
 export default function Location(){
     return (
       <View style = {styles.pageTitle} >
         <Text style={styles.title}> Welcome to Baram </Text>
+        <Text style={styles.context}> To refresh location tap 'Main' again please </Text>
       </View>
     );
 }
@@ -29,4 +30,9 @@ const styles = StyleSheet.create({
     fontSize: 30,
     fontWeight: 'bold',
   },
+  context:{
+    marginTop:50,
+    fontsize:15,
+    textAlign: 'center',
+  }
 });
