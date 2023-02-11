@@ -6,6 +6,7 @@ import {
     Text,
     View,
     Button,
+    ScrollView,
   } from 'react-native';
   
 
@@ -22,11 +23,12 @@ export default function Location(){
         {"\n"} The current windspeed is: 
         </Text>
         
-        <Text style={styles.context}> The weather for the week will be:
-        {"\n"}
-        [display scrollable weather list here] 
+        <Text style={styles.context}> The current weather in Wellingron is: [Icon here] 
+        {"\n"} There is a 4% chance of rain
+        {"\n"} The current temperature is: 26
+        {"\n"} The current windspeed is: 12m/s
         </Text>
-
+        
         
         <Button 
         //onPress() = {}
