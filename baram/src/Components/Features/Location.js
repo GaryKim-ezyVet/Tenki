@@ -5,7 +5,10 @@ import {
     StyleSheet,
     Text,
     View,
+    Button,
   } from 'react-native';
+  
+
 
 //first load location 
 //run the Location function onclick again in case they need to refresh the location
@@ -13,7 +16,17 @@ export default function Location(){
     return (
       <View style = {styles.pageTitle} >
         <Text style={styles.title}> Welcome to Baram </Text>
-        <Text style={styles.context}> To refresh location tap 'Main' again please </Text>
+        <Text style={styles.context}> The current weather in [Your current location] is: [Icon here] 
+        {"\n"} There is a 20% chance of rain
+        {"\n"} The current temperature is:
+        {"\n"} The current windspeed is: 
+        </Text>
+        
+        <Text style={styles.context}> The weather for the week will be:
+        {"\n"}
+        [display scrollable weather list here] 
+        </Text>
+        
       </View>
     );
 }

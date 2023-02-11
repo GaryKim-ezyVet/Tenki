@@ -16,6 +16,7 @@ const Tab_icon = {
 
 }
 
+
 const createScreenOptions = ({route}) => {
   const iconName = Tab_icon[route.name]
   return {
