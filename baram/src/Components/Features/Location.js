@@ -7,8 +7,8 @@ import {
     View,
     Button,
     ScrollView,
+    Image,
   } from 'react-native';
-  
 
 
 //first load location 
@@ -17,7 +17,8 @@ export default function Location(){
     return (
       <View style = {styles.pageTitle} >
         <Text style={styles.title}> Welcome to Baram </Text>
-        <Text style={styles.context}> The current weather in [Your current location] is: [Icon here] 
+        <Text style={styles.context}> The current weather at Your current location is:
+        {"\n"} <Image source={require('../../assets/rain.png')} />
         {"\n"} There is a 20% chance of rain
         {"\n"} The current temperature is:
         {"\n"} The current windspeed is: 
