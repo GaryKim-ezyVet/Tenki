@@ -26,7 +26,12 @@ export default function Location(){
         {"\n"}
         [display scrollable weather list here] 
         </Text>
+
         
+        <Button 
+        //onPress() = {}
+        title={"Press to update location"}
+        />
       </View>
     );
 }
