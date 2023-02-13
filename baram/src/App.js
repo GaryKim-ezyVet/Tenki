@@ -1,12 +1,10 @@
-import * as React from 'react';
+import React, {useState, useEffect} from 'react';
 import MainScreen from './components/Features/MainScreen.js';
 
 
+export default function App(){
 
-function App(){
   return(
     <MainScreen />
   );
 }
-
-export default App;
