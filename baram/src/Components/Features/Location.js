@@ -1,18 +1,38 @@
-//will have function here to export the location from API 
-//https://www.npmjs.com/package/react-native-weather-api
-import * as React from 'react';
+import React, {useState, useEffect} from 'react';
 import {
     StyleSheet,
     Text,
     View,
     Button,
     Image,
+    State,
   } from 'react-native';
+import * as Location from 'expo-location';
 
 
-//first load location 
+function current_location() {
+  //Hook for location variable
+  const [location, setLocation] = useState(null);
+
+  useEffect(() => {
+    (async () => {
+      let { status } = await Location.requestForegroundPermissionsAsync();
+      //Error message
+      if (status !== 'granted') {
+        setErrorMsg('Please allow the app to access your location');
+        return;
+      }
+      let location = await Location.getCurrentPositionAsync({});
+      setLocation(location);
+    })();
+    }, []);
+}
+
+
 //run the Location function onclick again in case they need to refresh the location
-export default function Location(){
+export default function Applocation(){
+    
+    
     return (
       <View style = {styles.pageTitle} >
         <Text style={styles.title}> Welcome to Baram </Text>
@@ -31,7 +51,7 @@ export default function Location(){
         
         
         <Button 
-        //onPress() = {}
+        onPress= {current_location()}
         title={"Press to update location"}
         />
       </View>
