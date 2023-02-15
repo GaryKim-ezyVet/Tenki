@@ -6,52 +6,67 @@ import {
     Button,
     Image,
     State,
+    Alert,
   } from 'react-native';
 import * as Location from 'expo-location';
 
+const openWeatherKey = 'bb481abe6d37c9527b03cf0575897349';
+let weatherurl = 'https://api.openweathermap.org/data/3.0/onecall?&units=metric&exclude=minutely,hourly,&appid=${openWeatherKey}'
 
-function current_location() {
-  //Hook for location variable
+//user expo location and weather api to load weather details for current location. 
+function Update_Weather() {
+  //Hook for location variable and forecast variable
   const [location, setLocation] = useState(null);
-
+  const [forecast, setForecast] = useState(null);
   useEffect(() => {
     (async () => {
+      //request location permissions
       let { status } = await Location.requestForegroundPermissionsAsync();
-      //Error message
+      //Error message for when permission is not granted
       if (status !== 'granted') {
-        setErrorMsg('Please allow the app to access your location');
+        Alert.alert('Please allow the app to access your location');
         return;
       }
       let location = await Location.getCurrentPositionAsync({});
       setLocation(location);
+      const resposne = await fetch('${weatherurl}&lat=${location.coords.latitude}}&lon=${location.coords.longitude}&exclude={part}&appid=${openWeatherKey}')
+      const weatherresult = await resposne.json();
+
+      if(!response.ok){
+        setErrorMsg('Something is wrong')
+      }
+      else{
+        setForecast(weatherresult);
+      }
+      loadForecast();
     })();
     }, []);
-}
+    console.log("test");
+    }
 
 
-//run the Location function onclick again in case they need to refresh the location
+
 export default function Applocation(){
-    
-    
+  
     return (
       <View style = {styles.pageTitle} >
         <Text style={styles.title}> Welcome to Baram </Text>
-        <Text style={styles.context}> The current weather at Your current location is:
-        {"\n"} <Image source={require('../../assets/rain.png')} />
-        {"\n"} There is a 20% chance of rain
-        {"\n"} The current temperature is:
-        {"\n"} The current windspeed is: 
-        </Text>
+        <Text style={styles.contextheader}>It is currently : </Text>
+        <Image style={styles.icons} source={require('../../assets/rain.png')} />
+        <Text style={styles.context}>There is a 100% chance of rain </Text>
+        <Text style={styles.context}>The current temperature is:</Text>
+        <Text style={styles.context}>The current windspeed is: </Text>
+      
         
-        <Text style={styles.context}> The current weather in Wellingron is: [Icon here] 
+        <Text style={styles.contextheader}> The current weather in Wellingron is: [Icon here] 
         {"\n"} There is a 4% chance of rain
         {"\n"} The current temperature is: 26
         {"\n"} The current windspeed is: 12m/s
         </Text>
         
-        
+        {/* Press to re-load weather and location information */ }
         <Button 
-        onPress= {current_location()}
+        onPress= {this.Update_Weather}
         title={"Press to update location"}
         />
       </View>
@@ -70,9 +85,18 @@ const styles = StyleSheet.create({
     fontSize: 30,
     fontWeight: 'bold',
   },
-  context:{
-    marginTop:50,
+  contextheader:{
+    marginTop: 30,
     fontsize:15,
     textAlign: 'center',
+  },
+  context:{
+    marginTop: 3,
+    fontsize:15,
+    textAlign: 'center',
+  },
+  icons:{
+    marginLeft: 'auto',
+    marginRight: 'auto',
   }
 });
