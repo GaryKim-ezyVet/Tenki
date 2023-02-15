@@ -16,7 +16,7 @@ const openWeatherKey = 'bb481abe6d37c9527b03cf0575897349';
 let weatherurl = 'https://api.openweathermap.org/data/3.0/onecall?&units=metric&exclude=minutely,hourly,&appid=${openWeatherKey}'
 
 //user expo location and weather api to load weather details for current location. 
-const Update_Weather=() =>  {
+export function Update_Weather() {
   //Hook for location variable and forecast variable
   const [location, setLocation] = useState(null);
   const [forecast, setForecast] = useState(null);
@@ -68,9 +68,8 @@ export default function Applocation(){
         {/* Press to re-load weather and location information */ }
        <Button 
         title={"Press to update location"}
-        onPress = { () => {
-          console.log('test button');
-        }}
+        onPress = {this.Update_Weather
+        }
         />
       </View>
     );
