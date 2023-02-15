@@ -7,14 +7,16 @@ import {
     Image,
     State,
     Alert,
+    Component,
   } from 'react-native';
 import * as Location from 'expo-location';
 
+//weather key from openweather api
 const openWeatherKey = 'bb481abe6d37c9527b03cf0575897349';
 let weatherurl = 'https://api.openweathermap.org/data/3.0/onecall?&units=metric&exclude=minutely,hourly,&appid=${openWeatherKey}'
 
 //user expo location and weather api to load weather details for current location. 
-function Update_Weather() {
+const Update_Weather=() =>  {
   //Hook for location variable and forecast variable
   const [location, setLocation] = useState(null);
   const [forecast, setForecast] = useState(null);
@@ -42,12 +44,10 @@ function Update_Weather() {
     })();
     }, []);
     console.log("test");
+    console.log(weatherresult);
     }
 
-
-
 export default function Applocation(){
-  
     return (
       <View style = {styles.pageTitle} >
         <Text style={styles.title}> Welcome to Baram </Text>
@@ -63,11 +63,14 @@ export default function Applocation(){
         {"\n"} The current temperature is: 26
         {"\n"} The current windspeed is: 12m/s
         </Text>
-        
+    
+
         {/* Press to re-load weather and location information */ }
-        <Button 
-        onPress= {this.Update_Weather}
+       <Button 
         title={"Press to update location"}
+        onPress = { () => {
+          console.log('test button');
+        }}
         />
       </View>
     );
