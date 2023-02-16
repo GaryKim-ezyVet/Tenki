@@ -1,0 +1,116 @@
+import * as React from 'react';
+import {
+  Text,
+  View,
+  StyleSheet,
+  Platform,
+  StatusBar,
+  Button,
+  SafeAreaView,
+} from 'react-native';
+import {NavigationContainer} from '@react-navigation/native';
+import {createNativeStackNavigator} from '@react-navigation/native-stack';
+
+const Stack = createNativeStackNavigator();
+
+const RefreshScreen = ({navigation}) => {
+  return <Text>This is {route.params.name}'s profile</Text>;
+};
+
+const MapsScreen = ({navigation, route}) => {
+  return <Text>This is {route.params.name}'s profile</Text>;
+};
+
+const SettingsScreen = ({navigation, route}) => {
+  return <Text>This is {route.params.name}'s profile</Text>;
+};
+
+function MainScreen() {
+  return (
+    <SafeAreaView>
+      <Text>
+        Hello World
+      </Text>
+    <NavigationContainer>
+        <Stack.Screen
+          name="Refresh"
+          component={RefreshScreen}
+        />
+        <Stack.Screen name="Maps" 
+        component={MapsScreen} 
+        />
+        <Stack.Screen name="Settings" 
+        component={SettingsScreen} 
+        />
+      </NavigationContainer>
+    </SafeAreaView>
+  );
+}
+
+
+export default MainScreen;
+
+
+Should build safe areas 
+
+
+
+
+
+// export default class AppLocation extends Component {
+//   Update_Weather = () => {
+//     const [location, setLocation] = useState(null);
+//     const [forecast, setForecast] = useState(null);
+//     useEffect(() => {
+//      (async () => {
+//         //request location permissions
+//        let { status } = await Location.requestForegroundPermissionsAsync();
+//         //Error message for when permission is not granted
+//         if (status !== 'granted') {
+//           Alert.alert('Please allow the app to access your location');
+//           return;
+//         }
+//         let location = await Location.getCurrentPositionAsync({});
+//         setLocation(location);
+//         const resposne = await fetch('${weatherurl}&lat=${location.coords.latitude}}&lon=${location.coords.longitude}&exclude={part}&appid=${openWeatherKey}')
+//         const weatherresult = await resposne.json();
+
+//         if(!response.ok){
+//           setErrorMsg('Something is wrong')
+//         }
+//         else{
+//           setForecast(weatherresult);
+//         }
+//         loadForecast();
+//       })();
+//   }, []);
+//   console.log("test");
+//   console.log(weatherresult);
+//   }
+//   return (
+//       <View style = {styles.pageTitle} >
+//         <Text style={styles.title}> Welcome to Baram </Text>
+//         <Text style={styles.contextheader}>It is currently : </Text>
+//         <Image style={styles.icons} source={require('../../assets/rain.png')} />
+//         <Text style={styles.context}>There is a 100% chance of rain </Text>
+//         <Text style={styles.context}>The current temperature is:</Text>
+//         <Text style={styles.context}>The current windspeed is: </Text>
+      
+        
+//         <Text style={styles.contextheader}> The current weather in Wellingron is: [Icon here] 
+//         {"\n"} There is a 4% chance of rain
+//         {"\n"} The current temperature is: 26
+//         {"\n"} The current windspeed is: 12m/s
+//         </Text>
+    
+
+//         {/* Press to re-load weather and location information */ }
+//         <Button 
+//         title={"Press to update location"}
+//         onPress = { () => {
+//           this.Update_Weather;
+//         }}
+//         />
+//       </View>
+//     );
+// }
