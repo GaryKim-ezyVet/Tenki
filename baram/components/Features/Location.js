@@ -14,28 +14,27 @@ export default function Applocation() {
   const [forecast, setForecast] = useState(null);
 
   useEffect(() => {
-    load();
+    loadWeather();
     });
-    async function load() {
-      try {
-        let { status } = await Location.requestForegroundPermissionsAsync();
-        if (status !== 'granted') {
-          setErrorMsg('Please allow app to access your location to use the app');
-          return;
-        }
-
-        let globalPositioning = await Location.getCurrentPositionAsync({});
-        setglobalPositioning(globalPositioning);
-
-        const {current_lat, current_long} = globalPositioning.coords;
-        const weather_url = '${base_weather_api_url}lat=${current_lat}&lon=${current_long}&appid={openWeatherKey}';
-        
+  async function loadWeather() {
+    try {
+      let { status } = await Location.requestForegroundPermissionsAsync();
+      if (status !== 'granted') {
+        setErrorMsg('Please allow app to access your location to use the app');
+        return;
       }
-      catch {
-        console.log('fail');
+
+      let globalPositioning = await Location.getCurrentPositionAsync({});
+      setglobalPositioning(globalPositioning);
+
+      const {current_lat, current_long} = globalPositioning.coords;
+      const weather_url = '${base_weather_api_url}lat=${current_lat}&lon=${current_long}&appid={openWeatherKey}';
+      const api_response = await fetch(weather_url);
+      const weather_result = await Response.json();
     }
-    }
-  console.log('test');
+    
+    
+  }
 
 
   return (
@@ -58,7 +57,7 @@ export default function Applocation() {
       {/* Press to re-load weather and location information */}
       <Button 
       title = {'Press to update location'} 
-      onPress = {load()} />
+      onPress = {loadWeather()} />
     </View>
   );
 }
