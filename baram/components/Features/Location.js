@@ -33,7 +33,9 @@ export default function Applocation() {
       const weather_result = await Response.json();
     }
     
-    
+    finally{
+      console.log('end load');
+    }
   }
 
 
