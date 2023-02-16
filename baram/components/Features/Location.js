@@ -3,36 +3,43 @@ import { StyleSheet, Text, View, Button, Image, Alert } from 'react-native';
 import * as Location from 'expo-location';
 
 //weather key from openweather api
-const openWeatherKey = 'bb481abe6d37c9527b03cf0575897349';
-let weatherurl = 'https://api.openweathermap.org/data/3.0/onecall?&units=metric&exclude=minutely,hourly,&appid=${openWeatherKey}';
+//const openWeatherKey = 'bb481abe6d37c9527b03cf0575897349';
+//let weatherurl = 'https://api.openweathermap.org/data/3.0/onecall?&units=metric&exclude=minutely,hourly,&appid=${openWeatherKey}';
 
 //user expo location and weather api to load weather details for current location.
 
 export default function Applocation() {
   const [globalPositioning, setglobalPositioning] = useState();
+  const [errorMsg, setErrorMsg] = useState(null);
   const [forecast, setForecast] = useState();
-  const updateGlobalPositioning = useEffect(() => {async () => {
-      //request location permissions
-      console.log('test');
+  console.log('1st test');
+  //const updateGlobalPositioning = useEffect(() => {async () => {
+  useEffect(() => {
+    (async () => {
+      
       let { status } = await Location.requestForegroundPermissionsAsync();
-      //Error message for when permission is not granted
       if (status !== 'granted') {
-        Alert.alert('Please allow the app to access your location');
-      return;
+        setErrorMsg('Permission to access location was denied');
+        return;
       }
+
       let globalPositioning = await Location.getCurrentPositionAsync({});
       setglobalPositioning(globalPositioning);
-      const resposne = await fetch('${weatherurl}&lat=${location.coords.latitude}}&lon=${location.coords.longitude}&exclude={part}&appid=${openWeatherKey}')
-      const weatherresult = await resposne.json();
+    })();
+  }, []);
 
-      if(!response.ok){
-        setErrorMsg('Something is wrong')
-      }
-      else{
-        setForecast(weatherresult);
-      }
-  }})
+  let text = 'Waiting..';
+  if (errorMsg) {
+    text = errorMsg;
+  } else if (globalPositioning) {
+    text = JSON.stringify(globalPositioning);
+      
+  }
+  console.log(globalPositioning);
+  console.log(text);
+  console.log('global');
 
+  
   return (
     <View style={styles.pageTitle}>
       <Text style={styles.title}> Welcome to Baram </Text>
@@ -51,7 +58,7 @@ export default function Applocation() {
       </Text>
 
       {/* Press to re-load weather and location information */}
-      <Button title={'Press to update location'} onPress={updateGlobalPositioning}/>
+      <Button title={'Press to update location'} />
     </View>
   );
 }
