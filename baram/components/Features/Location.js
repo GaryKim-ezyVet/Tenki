@@ -9,14 +9,17 @@ const base_weather_api_url = "https://api.openweathermap.org/data/2.5/weather?";
 //user expo location and weather api to load weather details for current location.
 
 export default function Applocation() {
+  console.log('app started');
   const [globalPositioning, setglobalPositioning] = useState(null);
   const [errorMsg, setErrorMsg] = useState(null);
   const [forecast, setForecast] = useState(null);
 
   useEffect(() => {
-    loadWeather();
-    });
-  async function loadWeather() {
+    loadWeather;
+    }, []);
+  const loadWeather = async () => {
+    console.log('button pressed');
+   
     try {
       let { status } = await Location.requestForegroundPermissionsAsync();
       if (status !== 'granted') {
@@ -27,16 +30,20 @@ export default function Applocation() {
       let globalPositioning = await Location.getCurrentPositionAsync({});
       setglobalPositioning(globalPositioning);
 
-      const {current_lat, current_long} = globalPositioning.coords;
-      const weather_url = '${base_weather_api_url}lat=${current_lat}&lon=${current_long}&appid={openWeatherKey}';
-      const api_response = await fetch(weather_url);
-      const weather_result = await Response.json();
+    const {current_lat, current_long} = globalPositioning.coords;
+    const weather_url = '${base_weather_api_url}lat=${current_lat}&lon=${current_long}&appid={openWeatherKey}';
+    const api_response = await fetch(weather_url);
+    const weather_result = await Response.json();
+
+
+
     }
     
     finally{
       console.log('end load');
     }
   }
+  
 
 
   return (
@@ -58,10 +65,13 @@ export default function Applocation() {
 
       {/* Press to re-load weather and location information */}
       <Button 
-      title = {'Press to update location'} 
-      onPress = {loadWeather()} />
+      title = {'Update location'} 
+      onClick = {loadWeather}>
+      </Button>
+     
     </View>
   );
+  
 }
 
 
