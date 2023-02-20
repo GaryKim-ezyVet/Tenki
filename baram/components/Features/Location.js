@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { StyleSheet, Text, View, Button, Image, Alert } from 'react-native';
 import * as Location from 'expo-location';
 
-const api ={
+const api = {
   
 //weather key from openweather api
 openWeatherKey: 'bb481abe6d37c9527b03cf0575897349',
@@ -21,6 +21,10 @@ export default function Applocation() {
     loadWeather;
     }, []);
   const loadWeather = async () => {
+    
+    let globalPositioning = await Location.getCurrentPositionAsync({});
+    setglobalPositioning(globalPositioning);   
+
     const {current_lat, current_long} = globalPositioning.coords;
     //fetch information from the API then assign the value to variable Forecast
     fetch('${api.base_weather_api_url}q=Auckland,nz&appid=${api.openWeatherKey}')
@@ -34,11 +38,7 @@ export default function Applocation() {
         setErrorMsg('Please allow app to access your location to use the app');
         return;
       }
-
-      let globalPositioning = await Location.getCurrentPositionAsync({});
-      setglobalPositioning(globalPositioning);
-
-    
+ 
   
     }
     
@@ -52,11 +52,6 @@ export default function Applocation() {
   return (
     <View style={styles.pageTitle}>
       <Text style={styles.title}> Welcome to Baram </Text>
-      <Text style={styles.contextheader}>It is currently : {forecast.main}</Text>
-      <Image style={styles.icons} source={require('../../assets/rain.png')} />
-      <Text style={styles.context}>There is a 100% chance of rain </Text>
-      <Text style={styles.context}>The current temperature is:</Text>  
-      <Text style={styles.context}>The current windspeed is: </Text>
 
       <Text style={styles.contextheader}>
         {'\n'}The current weather in Wellington is: [Icon here]
