@@ -2,65 +2,73 @@ import React, { useState, useEffect } from 'react';
 import { StyleSheet, Text, View, Button, Image, Alert } from 'react-native';
 import * as Location from 'expo-location';
 
+const api = {
+  
 //weather key from openweather api
-const openWeatherKey = 'bb481abe6d37c9527b03cf0575897349';
-const base_weather_api_url = "https://api.openweathermap.org/data/2.5/weather?";
+openWeatherKey: 'bb481abe6d37c9527b03cf0575897349',
+base_weather_api_url: 'https://api.openweathermap.org/data/2.5/weather?',
+}
 
 //user expo location and weather api to load weather details for current location.
 
 export default function Applocation() {
+  console.log('app started');
   const [globalPositioning, setglobalPositioning] = useState(null);
   const [errorMsg, setErrorMsg] = useState(null);
-  const [forecast, setForecast] = useState(null);
+  const [forecast, setForecast] = useState({});
 
   useEffect(() => {
-    load();
-    });
-    async function load() {
-      try {
-        let { status } = await Location.requestForegroundPermissionsAsync();
-        if (status !== 'granted') {
-          setErrorMsg('Please allow app to access your location to use the app');
-          return;
-        }
+    loadWeather;
+    }, []);
+  const loadWeather = async () => {
+    
+    let globalPositioning = await Location.getCurrentPositionAsync({});
+    setglobalPositioning(globalPositioning);   
 
-        let globalPositioning = await Location.getCurrentPositionAsync({});
-        setglobalPositioning(globalPositioning);
-
-        const {current_lat, current_long} = globalPositioning.coords;
-        const weather_url = '${base_weather_api_url}lat=${current_lat}&lon=${current_long}&appid={openWeatherKey}';
-        
+    const {current_lat, current_long} = globalPositioning.coords;
+    //fetch information from the API then assign the value to variable Forecast
+    fetch('${api.base_weather_api_url}q=Auckland,nz&appid=${api.openWeatherKey}')
+      .then((response) => response.json())
+      .then((openWeather) => {
+        setForecast(openWeather);
+      })
+    try {
+      let { status } = await Location.requestForegroundPermissionsAsync();
+      if (status !== 'granted') {
+        setErrorMsg('Please allow app to access your location to use the app');
+        return;
       }
-      catch {
-        console.log('fail');
+ 
+  
     }
+    
+    catch (errorMsg){
+      setErrorMsg(errorMsg.message)
     }
-  console.log('test');
+  }
+  
 
 
   return (
     <View style={styles.pageTitle}>
       <Text style={styles.title}> Welcome to Baram </Text>
-      <Text style={styles.contextheader}>It is currently : </Text>
-      <Image style={styles.icons} source={require('../../assets/rain.png')} />
-      <Text style={styles.context}>There is a 100% chance of rain </Text>
-      <Text style={styles.context}>The current temperature is:</Text>
-      <Text style={styles.context}>The current windspeed is: </Text>
 
       <Text style={styles.contextheader}>
-        {' '}
-        The current weather in Wellingron is: [Icon here]
+        {'\n'}The current weather in Wellington is: [Icon here]
         {'\n'} There is a 4% chance of rain
         {'\n'} The current temperature is: 26
         {'\n'} The current windspeed is: 12m/s
       </Text>
 
-      {/* Press to re-load weather and location information */}
+      {/* Press to re-load weather*/}
       <Button 
-      title = {'Press to update location'} 
-      onPress = {load()} />
+      title = {'Update location'} 
+      onClick = {loadWeather}
+      />
+     
     </View>
   );
+  
 }
 
 
