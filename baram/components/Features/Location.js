@@ -13,38 +13,31 @@ base_weather_api_url: 'https://api.openweathermap.org/data/2.5/weather?',
 
 export default function Applocation() {
   console.log('app started');
-  const [globalPositioning, setglobalPositioning] = useState(null);
-  const [errorMsg, setErrorMsg] = useState(null);
   const [forecast, setForecast] = useState({});
+  const [globalLat, setglobalLat] = useState([]);
+  const [globalLon, setglobalLon] = useState([]);
 
   useEffect(() => {
-    loadWeather;
+
+    loadWeather;  
     }, []);
   const loadWeather = async () => {
     
+    //Access permissions to access location services 
+    let { status } = await Location.requestForegroundPermissionsAsync();
     let globalPositioning = await Location.getCurrentPositionAsync({});
-    setglobalPositioning(globalPositioning);   
-
-    const {current_lat, current_long} = globalPositioning.coords;
-    //fetch information from the API then assign the value to variable Forecast
-    fetch('${api.base_weather_api_url}q=Auckland,nz&appid=${api.openWeatherKey}')
-      .then((response) => response.json())
-      .then((openWeather) => {
-        setForecast(openWeather);
-      })
-    try {
-      let { status } = await Location.requestForegroundPermissionsAsync();
-      if (status !== 'granted') {
-        setErrorMsg('Please allow app to access your location to use the app');
-        return;
-      }
- 
-  
-    }
     
-    catch (errorMsg){
-      setErrorMsg(errorMsg.message)
-    }
+    //set global coordinates for latitude and longitude
+    setglobalLat(globalPositioning.coords.latitude);
+    setglobalLon(globalPositioning.coords.longitude);
+    
+
+    //fetch information from the API then assign the value to variable Forecast
+    fetch('${api.base_weather_api_url}lat=${globalLat}&lon=${globalLon}&units=metric&APPID=${api.openWeatherKey}')
+      .then((res) => res.json())
+      .then((result) => {
+        setForecast(result);
+      })
   }
   
 
@@ -52,7 +45,11 @@ export default function Applocation() {
   return (
     <View style={styles.pageTitle}>
       <Text style={styles.title}> Welcome to Baram </Text>
-
+      <Text style={styles.contextheader}>It is currently : {forecast.main}</Text>
+      <Image style={styles.icons} source={require('../../assets/rain.png')} />
+      <Text style={styles.context}>The current humidity is: {forecast.main.humidity}</Text>
+      <Text style={styles.context}>The current temperature is:{forecast.main.temp}</Text>  
+      <Text style={styles.context}>The current windspeed is: {forecast.wind.speed}</Text>
       <Text style={styles.contextheader}>
         {'\n'}The current weather in Wellington is: [Icon here]
         {'\n'} There is a 4% chance of rain
