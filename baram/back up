@@ -114,3 +114,5 @@ Should build safe areas
 //       </View>
 //     );
 // }
+
+//fetch('https://api.openweathermap.org/data/2.5/weather?lat=37.4226711&lon=-122.0849872&appid=bb481abe6d37c9527b03cf0575897349')
