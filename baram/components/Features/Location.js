@@ -35,7 +35,7 @@ export default function Applocation() {
     console.log('lat:', globalLat);
 
     //fetch(`${base_weather_api_url}lat=${globalLat}?&lon=${globalLon}?&units=metric&APPID=${openWeatherKey}`)
-    fetch('https://api.openweathermap.org/data/2.5/weather?lat=37.4226711&lon=-122.0849872&appid=bb481abe6d37c9527b03cf0575897349')
+    fetch('https://api.openweathermap.org/data/2.5/weather?lat=37.4226711&lon=-122.0849872&units=metric&appid=bb481abe6d37c9527b03cf0575897349')
       .then((res) => res.json())
       .then((result) => {
       setForecast(result)
@@ -43,20 +43,17 @@ export default function Applocation() {
     })
     
     console.log('forecast', forecast);
+    console.log('weather',forecast?.main.humidity);
   }
 
   return (
     <View style={styles.pageTitle}>
       
       <Text style={styles.title}> Welcome to Baram </Text>
-      <Text>{forecast?.main.temp}</Text>
+      <Text style={styles.contextheader}>The current temperature is: {forecast?.main.temp}</Text>
+      <Text style={styles.context}>The current weather is: {forecast?.weather[0].main} </Text>
+      <Text style={styles.context}>The current humidity is {forecast?.main.humidity}% </Text>
       <Image style={styles.icons} source={require('../../assets/rain.png')} />
-      <Text style={styles.contextheader}>
-        {'\n'}The current weather in Wellington is: [Icon here]
-        {'\n'} There is a 4% chance of rain
-        {'\n'} The current temperature is: 26
-        {'\n'} The current windspeed is: 12m/s
-      </Text>
       
       <Button 
       title = {'Update location'} 
