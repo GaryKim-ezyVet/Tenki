@@ -11,7 +11,7 @@ const Tab = createBottomTabNavigator();
 const Tab_icon = {
   //after optimising I am unsure how to change the icon based on it's focus
   Main: 'md-cloud',
-  Map: 'md-map',
+  Search: 'md-search',
   Settings: 'md-settings',
 
 }
@@ -38,7 +38,7 @@ export default function MainScreen() {
           }}
         >
           <Tab.Screen name='Main' component={Location} />
-          <Tab.Screen name='Map' component={MapScreen} />
+          <Tab.Screen name='Search' component={MapScreen} />
           <Tab.Screen name='Settings' component={SettingsScreen} />
         </Tab.Navigator>
       </NavigationContainer>

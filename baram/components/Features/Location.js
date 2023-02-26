@@ -10,7 +10,6 @@ const base_weather_api_url = 'https://api.openweathermap.org/data/2.5/weather?';
 
 //user expo location and weather api to load weather details for current location.
 export default function Applocation() {
-  console.log('app started');
   const [forecast, setForecast] = useState(null);
   const [globalLat, setglobalLat] = useState([]);
   const [globalLon, setglobalLon] = useState([]);
@@ -24,39 +23,38 @@ export default function Applocation() {
     //Access permissions to access location services 
     let { status } = await Location.requestForegroundPermissionsAsync();
     let globalPositioning = await Location.getCurrentPositionAsync({});
-    
-    //set global coordinates for latitude and longitude
-    setglobalLat(globalPositioning.coords.latitude);
-    setglobalLon(globalPositioning.coords.longitude);
-    
+    try{
+      //set global coordinates for latitude and longitude
+      setglobalLat(globalPositioning.coords.latitude);
+      setglobalLon(globalPositioning.coords.longitude);
+    }
+    //catch for when api link is invalid 
+    catch(e) {
+      console.log('something went wrong please try again later');
+    }
     console.log('Global positioning: ', globalPositioning);
     //fetch information from the API then assign the value to variable Forecast
     console.log('lon:', globalLon);
     console.log('lat:', globalLat);
 
-    //fetch(`${base_weather_api_url}lat=${globalLat}?&lon=${globalLon}?&units=metric&APPID=${openWeatherKey}`)
-    fetch('https://api.openweathermap.org/data/2.5/weather?lat=37.4226711&lon=-122.0849872&appid=bb481abe6d37c9527b03cf0575897349')
-      .then((res) => res.json())
-      .then((result) => {
-      setForecast(result)
+      //fetch(`${base_weather_api_url}lat=${globalLat}?&lon=${globalLon}?&units=metric&APPID=${openWeatherKey}`)
+      fetch('https://api.openweathermap.org/data/2.5/weather?lat=37.4226711&lon=-122.0849872&units=metric&appid=bb481abe6d37c9527b03cf0575897349')
+        .then((res) => res.json())
+        .then((result) => {
+        setForecast(result)
       console.log('result',result)
-    })
+      })
     
-    console.log('forecast', forecast);
   }
 
   return (
     <View style={styles.pageTitle}>
       
       <Text style={styles.title}> Welcome to Baram </Text>
-      <Text>{forecast?.main.temp}</Text>
+      <Text style={styles.contextheader}>The current temperature is: {forecast?.main.temp}</Text>
+      <Text style={styles.context}>The current weather is: {forecast?.weather[0].main} </Text>
+      <Text style={styles.context}>The current humidity is {forecast?.main.humidity}% </Text>
       <Image style={styles.icons} source={require('../../assets/rain.png')} />
-      <Text style={styles.contextheader}>
-        {'\n'}The current weather in Wellington is: [Icon here]
-        {'\n'} There is a 4% chance of rain
-        {'\n'} The current temperature is: 26
-        {'\n'} The current windspeed is: 12m/s
-      </Text>
       
       <Button 
       title = {'Update location'} 
