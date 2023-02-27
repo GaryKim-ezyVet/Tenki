@@ -9,9 +9,8 @@ import {Ionicons} from '@expo/vector-icons';
 
 const Tab = createBottomTabNavigator();
 const Tab_icon = {
-  //after optimising I am unsure how to change the icon based on it's focus
   Main: 'md-cloud',
-  Search: 'md-search',
+  Map: 'md-search',
   Settings: 'md-settings',
 
 }
@@ -20,7 +19,6 @@ const createScreenOptions = ({route}) => {
   const iconName = Tab_icon[route.name]
   return {
     tabBarIcon: ({size, color}) => (
-      //set configuration of the navigation bar 
       <Ionicons name={iconName} size={25} color={color}/>
     ),
   };
@@ -33,12 +31,11 @@ export default function MainScreen() {
           screenOptions = {createScreenOptions} 
           tabBarOptions={{
             //set the color of the icons based on whether they are active or inactive 
-            tabBarActiveTintColor: '#32bef6',
             tabBarInactiveTintColor: 'gray',
           }}
         >
           <Tab.Screen name='Main' component={Location} />
-          <Tab.Screen name='Search' component={MapScreen} />
+          <Tab.Screen name='Map' component={MapScreen} />
           <Tab.Screen name='Settings' component={SettingsScreen} />
         </Tab.Navigator>
       </NavigationContainer>

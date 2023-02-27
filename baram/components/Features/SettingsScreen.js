@@ -2,6 +2,8 @@ import * as React from 'react';
 import {
   Text,
   View,
+  useColorScheme,
+  Appearance
 } from 'react-native';
 
 //load setting screen

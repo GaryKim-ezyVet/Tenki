@@ -1,4 +1,4 @@
-//will have function here to export the location from API 
+//will have function here to export the location from API  https://openweathermap.org/api/weathermaps
 import * as React from 'react';
 import {
     Text,
