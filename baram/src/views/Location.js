@@ -17,14 +17,10 @@ export default function Applocation() {
   const [globalLat, setglobalLat] = useState(0);
   const [globalLon, setglobalLon] = useState(0);
   
-  console.log('start app');
     
   useEffect(() => {  
-
+    
     const loadWeather = async () => {
-
-    //console log to tract start of async function
-    console.log('start async function')
 
     //Access permissions to access location services 
     await Location.requestForegroundPermissionsAsync();
@@ -35,11 +31,6 @@ export default function Applocation() {
     //set global coordinates for latitude and longitude
     setglobalLat(globalPositioning.coords.latitude);
     setglobalLon(globalPositioning.coords.longitude);
-
-    //console log to test global positioning has been set - therefore long and lat should be set 
-    console.log('Global positioning: ', globalPositioning);
-    console.log('before fetch lon:', globalLon);
-    console.log('before fetch lat:', globalLat);
     
     
   }; 
@@ -47,8 +38,6 @@ loadWeather();
 },[]);
 
 
-  console.log('after fetch lon:', globalLon);
-  console.log('after fetch lat:', globalLat);
 
   //set up if and else so that useEffect will only run if globalLon and Lat are set
   useEffect(() =>{
@@ -64,11 +53,13 @@ loadWeather();
 
 
 
-  //icon list: https://openweathermap.org/weather-conditions
+  //icon list: https://openweathermap.org/weather-conditions 
   return (
     <View style={styles.pageTitle}>
-      
-      <Image source={require('../../assets/baram-logo.png')} />
+      <Image 
+      style = {styles.logo}
+      source={require('../../assets/baram-logo.png') } 
+      />
       <HorizontalSlider 
       cityName = {forecast?.name}
       cityTemp = {forecast?.main.temp}
@@ -124,6 +115,13 @@ const styles = StyleSheet.create({
     textAlign: 'center',
   },
   icons: {
+    marginLeft: 'auto',
+    marginRight: 'auto',
+  },
+  logo: {
+    width: 150,
+    height: 150,
+    marginTop: 10,
     marginLeft: 'auto',
     marginRight: 'auto',
   },

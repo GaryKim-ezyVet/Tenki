@@ -2,9 +2,9 @@ import * as React from 'react';
 import { Text, View } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-import Location from './Location';
-import MapScreen from './MapScreen';
-import SettingsScreen from './SettingsScreen.js';
+import Location from '../views/Location';
+import MapScreen from '../views/MapScreen';
+import SettingsScreen from '../views/SettingsScreen.js';
 import {Ionicons} from '@expo/vector-icons';
 
 const Tab = createBottomTabNavigator();
@@ -24,7 +24,7 @@ const createScreenOptions = ({route}) => {
   };
 };
 
-export default function MainScreen() {
+export default function MainNavigation() {
   return (
       <NavigationContainer>
         <Tab.Navigator
