@@ -7,9 +7,11 @@ import { styles } from '../styles/styles';
 export const WeatherDisplay = ({cityName, cityTemp, cityWeather, cityHumidity}) => {
   return(
     <View>
-      <Text style={styles.contextheader}>The current temperature at {cityName ?? 'Finding city'} is: {cityTemp ?? 'Loading'}</Text>
-      <Text style={styles.context}>The current weather is: {cityWeather ?? 'Loading'} </Text>
-      <Text style={styles.context}>The current humidity is {cityHumidity ?? 'Loading'}% </Text>
+      <Text style={styles.contextheader}>
+        {cityName ?? 'Finding city'} is: {cityTemp ?? 'Loading'}  
+        The current weather is: {cityWeather ?? 'Loading'}  
+        The current humidity is {cityHumidity ?? 'Loading'}%  
+      </Text>
     </View>
   )
 }

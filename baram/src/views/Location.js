@@ -15,12 +15,15 @@ const openWeatherKey = 'bb481abe6d37c9527b03cf0575897349';
 const base_weather_api_url = 'https://api.openweathermap.org/data/2.5/weather?';
 
 //user expo location and weather api to load weather details for current location.
+
+//GlobalLocation;
+
 export default function Applocation() {
 
-  //GlobalLocation;
-  const [globalLat, setglobalLat] = useState(0);
-  const [globalLon, setglobalLon] = useState(0);
+  const [globalLat, setglobalLat] = useState(null);
+  const [globalLon, setglobalLon] = useState(null);
   const [forecast, setForecast] = useState(null);
+
   useEffect(() => {  
 
     const loadWeather = async () => {
@@ -39,16 +42,24 @@ export default function Applocation() {
   }; 
 loadWeather();
 },[]);
+  
+
+
 
   //Forecast;
+  //if globallat and lon exist execute below code
+
   useEffect(() =>{
+    if (globalLat && globalLon) {
     fetch(`${base_weather_api_url}lat=${globalLat}&lon=${globalLon}&units=metric&APPID=${openWeatherKey}`)
       .then((res) => res.json())
       .then((result) => {
       setForecast(result)
-      
     })
+  }
   },[globalLat,globalLon]);
+
+  //else 
 
   
   //icon list: https://openweathermap.org/weather-conditions 
