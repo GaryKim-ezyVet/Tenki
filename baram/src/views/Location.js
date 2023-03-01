@@ -1,25 +1,31 @@
 import React, { useState, useEffect } from 'react';
-import { StyleSheet, Text, View, Image } from 'react-native';
+import { View, Image } from 'react-native';
+//import useWeather from '../utils/LoadWeather';
+//import loadLocation from '../utils/GlobalLocation';
 import * as Location from 'expo-location';
+import { WeatherDisplay } from '../components/WeatherDisplay';
+import { styles } from '../styles/styles';
   
-//Things to do / separate the code so that there is more structure (what is seen vs not) / if statement for Lat and Lon / use props and reusable components to build horizontal sliders for weather information
+//Things to do  
+//separate the code so that there is more structure (what is seen vs not) 
+// if statement for Lat and Lon 
+// use props and reusable components to build horizontal sliders for weather information
 
-//weather key from openweather api
 const openWeatherKey = 'bb481abe6d37c9527b03cf0575897349';
 const base_weather_api_url = 'https://api.openweathermap.org/data/2.5/weather?';
 
-
 //user expo location and weather api to load weather details for current location.
+
+//GlobalLocation;
+
 export default function Applocation() {
-  
-  //hooks for forecast and location variables
+
+  const [globalLat, setglobalLat] = useState(null);
+  const [globalLon, setglobalLon] = useState(null);
   const [forecast, setForecast] = useState(null);
-  const [globalLat, setglobalLat] = useState(0);
-  const [globalLon, setglobalLon] = useState(0);
-  
-    
+
   useEffect(() => {  
-    
+
     const loadWeather = async () => {
 
     //Access permissions to access location services 
@@ -31,7 +37,7 @@ export default function Applocation() {
     //set global coordinates for latitude and longitude
     setglobalLat(globalPositioning.coords.latitude);
     setglobalLon(globalPositioning.coords.longitude);
-    
+
     
   }; 
 loadWeather();
@@ -39,20 +45,22 @@ loadWeather();
 
 
 
-  //set up if and else so that useEffect will only run if globalLon and Lat are set
+  //Forecast;
+  //if globallat and lon exist execute below code
+
   useEffect(() =>{
-    //https://api.openweathermap.org/data/2.5/weather?lat=-36.8581337&lon=174.754095&units=metric&appid=bb481abe6d37c9527b03cf0575897349 at the ezyVet office
+    if (globalLat && globalLon) {
     fetch(`${base_weather_api_url}lat=${globalLat}&lon=${globalLon}&units=metric&APPID=${openWeatherKey}`)
       .then((res) => res.json())
       .then((result) => {
       setForecast(result)
-      
     })
+  }
   },[globalLat,globalLon]);
 
+  //else 
 
-
-
+  
   //icon list: https://openweathermap.org/weather-conditions 
   return (
     <View style={styles.pageTitle}>
@@ -60,7 +68,7 @@ loadWeather();
       style = {styles.logo}
       source={require('../../assets/baram-logo.png') } 
       />
-      <HorizontalSlider 
+      <WeatherDisplay 
       cityName = {forecast?.name}
       cityTemp = {forecast?.main.temp}
       cityWeather = {forecast?.weather[0].main}
@@ -68,8 +76,8 @@ loadWeather();
       cityHumidity = {forecast?.main.humidity}
       />
       
-      <HorizontalSlider 
-      cityName = {forecast?.name}
+      <WeatherDisplay 
+      cityName = {'Christchurch'}
       cityTemp = {forecast?.main.temp}
       cityWeather = {forecast?.weather[0].main}
       cityHumidity = {forecast?.main.humidity}
@@ -79,51 +87,3 @@ loadWeather();
   );
   
 }
-
-//Re-usable component to display weather information per city 
-//props > make sense which parts are grouped together > mental box > they become their own component > pass the data down 
-const HorizontalSlider = ({cityName, cityTemp, cityWeather, cityHumidity}) => {
-  return(
-    <View>
-      <Text style={styles.contextheader}>The current temperature at {cityName ?? 'Loading'} is: {cityTemp ?? 'Loading'}</Text>
-      <Text style={styles.context}>The current weather is: {cityWeather ?? 'Loading'} </Text>
-      <Text style={styles.context}>The current humidity is {cityHumidity ?? 'Loading'}% </Text>
-    </View>
-  )
-}
-
-const styles = StyleSheet.create({
-  pageTitle: {
-    flex: 1,
-  },
-  title: {
-    marginTop: 16,
-    backgroundColor: '#61dafb',
-    color: '#20232a',
-    textAlign: 'center',
-    fontSize: 30,
-    fontWeight: 'bold',
-  },
-  contextheader: {
-    marginTop: 30,
-    fontSize: 15,
-    textAlign: 'center',
-  },
-  context: {
-    marginTop: 3,
-    fontSize: 15,
-    textAlign: 'center',
-  },
-  icons: {
-    marginLeft: 'auto',
-    marginRight: 'auto',
-  },
-  logo: {
-    width: 150,
-    height: 150,
-    marginTop: 10,
-    marginLeft: 'auto',
-    marginRight: 'auto',
-  },
-});
-

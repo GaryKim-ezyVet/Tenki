@@ -1,0 +1,19 @@
+import { useState, useEffect } from 'react';
+import * as Location from 'expo-location';
+
+export default function loadLocation() {
+  const [globalLat, setGlobalLat] = useState(null);
+  const [globalLon, setGlobalLon] = useState(null);
+
+  useEffect(() => {  
+    const loadGlobalPosition = async () => {
+      await Location.requestForegroundPermissionsAsync();
+      let globalPositioning = await Location.getCurrentPositionAsync();
+      setGlobalLat(globalPositioning.coords.latitude);
+      setGlobalLon(globalPositioning.coords.longitude);
+    }; 
+    loadGlobalPosition();
+  },[]);
+
+  return [globalLat, globalLon];
+}
