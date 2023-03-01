@@ -1,0 +1,27 @@
+import React, { useState, useEffect } from 'react';
+import * as Location from 'expo-location';
+
+export const GlobalLocation = () => {
+//hooks for location variables
+  const [globalLat, setglobalLat] = useState(0);
+  const [globalLon, setglobalLon] = useState(0);
+  
+    
+  useEffect(() => {  
+    
+    const loadWeather = async () => {
+
+    //Access permissions to access location services 
+    await Location.requestForegroundPermissionsAsync();
+    
+    //load global lat and lon from the permissions
+    let globalPositioning = await Location.getCurrentPositionAsync();
+    
+    //set global coordinates for latitude and longitude
+    setglobalLat(globalPositioning.coords.latitude);
+    setglobalLon(globalPositioning.coords.longitude);
+    
+  }; 
+loadWeather();
+},[]);
+}
