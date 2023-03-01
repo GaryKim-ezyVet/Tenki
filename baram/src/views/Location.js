@@ -90,7 +90,6 @@ loadWeather();
       
       <WeatherDisplay 
       cityName = {'Christchurch'}
-      cityName = {'Christchurch'}
       cityTemp = {forecast?.main.temp}
       cityWeather = {forecast?.weather[0].main}
       cityHumidity = {forecast?.main.humidity}
