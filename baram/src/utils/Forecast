@@ -1,0 +1,21 @@
+import React, { useState, useEffect } from 'react';
+import {globalLat, globalLon} from './GlobalLocation'
+
+//weather key from openweather api
+const openWeatherKey = 'bb481abe6d37c9527b03cf0575897349';
+const base_weather_api_url = 'https://api.openweathermap.org/data/2.5/weather?';
+
+const [forecast, setForecast] = useState(null);
+
+export const Forecast = () => {
+
+//useEffect to re-run when global lat and lon have been changed
+  useEffect(() =>{
+    fetch(`${base_weather_api_url}lat=${globalLat}&lon=${globalLon}&units=metric&APPID=${openWeatherKey}`)
+      .then((res) => res.json())
+      .then((result) => {
+      setForecast(result)
+      
+    })
+  },[globalLat,globalLon]);
+}
