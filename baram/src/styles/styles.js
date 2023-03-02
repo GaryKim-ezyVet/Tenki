@@ -34,5 +34,31 @@ export const styles = StyleSheet.create({
       marginLeft: 'auto',
       marginRight: 'auto',
     },
+    card: {
+      backgroundColor: 'lightblue',
+      marginTop: 3,
+      marginBottom: 3
+    },
+    cover: {
+      padding: 20
+    },
+    container: {
+      flexDirection: 'row',
+      padding: 16,
+    },
+    column:{
+      flex: 1,
+      alignItems: 'center',
+      justifyContent: 'center',
+    },
+    label:{
+      fontSize: 16,
+      fontWeight: 'bold',
+      marginBottom: 4,
+    },
+    values: {
+      fontSize: 16,
+
+    }
   });
   
