@@ -26,6 +26,7 @@ export const styles = StyleSheet.create({
     icons: {
       marginLeft: 'auto',
       marginRight: 'auto',
+      width:3,
     },
     logo: {
       width: 150,
