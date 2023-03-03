@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { View, Image, FlatList } from 'react-native';
+import { SafeAreaView, Image, FlatList } from 'react-native';
 //import useWeather from '../utils/LoadWeather';
 //import loadLocation from '../utils/GlobalLocation';
 import * as Location from 'expo-location';
@@ -7,7 +7,7 @@ import { WeatherDisplay } from '../components/WeatherDisplay';
 import { styles } from '../styles/styles';
 
 
-const openWeatherKey = 'bb481abe6d37c9527b03cf0575897349';
+export const openWeatherKey = 'bb481abe6d37c9527b03cf0575897349';
 const base_weather_api_url = 'https://api.openweathermap.org/data/2.5/weather?';
 
 
@@ -47,10 +47,9 @@ loadWeather();
   },[globalLat,globalLon]);
 
 
-  //icon list: https://openweathermap.org/weather-conditions 
   //return a Flatlist which will load forecast into the Weather display cards if forecast value is not null
   return (
-    <View style={styles.pageTitle}>
+    <SafeAreaView style={styles.pageTitle}>
       <Image 
       style = {styles.logo}
       source={require('../../assets/baram-logo.png') } 
@@ -88,7 +87,7 @@ loadWeather();
       >
 
       </FlatList>
-    </View>
+    </SafeAreaView>
   );
   
 }

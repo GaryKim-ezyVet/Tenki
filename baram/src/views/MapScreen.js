@@ -1,17 +1,17 @@
-//will have function here to export the location from API  https://openweathermap.org/api/weathermaps
 import * as React from 'react';
 import {
-    Text,
-    View,
-    fetch,
+    SafeAreaView,
+    ImageBackground
   } from 'react-native';
+import { styles } from '../styles/styles';
+
 
 //load Maps
 // fetch(ww3-ecmwf.global);
 export default function MapScreen() {
   return (
-    <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-      <Text> This is where I will display the map with weather information </Text>
-    </View>
+    <SafeAreaView style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
+      <ImageBackground source={require('../../assets/New_Zealand_map.png')} style={styles.map} /> 
+    </SafeAreaView>
   );
 }

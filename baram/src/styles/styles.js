@@ -4,6 +4,7 @@ import { StyleSheet } from 'react-native';
 export const styles = StyleSheet.create({
     pageTitle: {
       flex: 1,
+      backgroundColor: 'white',
     },
     title: {
       marginTop: 16,
@@ -26,12 +27,13 @@ export const styles = StyleSheet.create({
     icons: {
       marginLeft: 'auto',
       marginRight: 'auto',
-      width:3,
+      width:0.5,
+      height:0.5,
     },
     logo: {
       width: 150,
       height: 150,
-      marginTop: 10,
+      marginTop: 1,
       marginLeft: 'auto',
       marginRight: 'auto',
     },
@@ -56,10 +58,19 @@ export const styles = StyleSheet.create({
       fontSize: 16,
       fontWeight: 'bold',
       marginBottom: 4,
+      alignItems: 'center',
     },
     values: {
-      fontSize: 16,
-
+      fontSize: 13,
+      alignItems: 'center',
+    },
+    appBackground:{
+      backgroundColor: 'blue',
+    },
+    map:{
+      width: '100%',
+      height: undefined,
+      aspectRatio: 0.7,
     }
   });
   

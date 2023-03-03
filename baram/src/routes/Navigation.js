@@ -5,11 +5,12 @@ import Location from '../views/Location';
 import MapScreen from '../views/MapScreen';
 import SettingsScreen from '../views/SettingsScreen.js';
 import {Ionicons} from '@expo/vector-icons';
+import { styles } from '../styles/styles';
 
 const Tab = createBottomTabNavigator();
 const Tab_icon = {
   Main: 'md-cloud',
-  Map: 'md-search',
+  Map: 'md-map',
   Settings: 'md-settings',
 
 }
@@ -25,7 +26,7 @@ const createScreenOptions = ({route}) => {
 
 export default function MainNavigation() {
   return (
-      <NavigationContainer>
+      <NavigationContainer style={styles.appBackground}>
         <Tab.Navigator
           screenOptions = {createScreenOptions} 
           tabBarOptions={{
