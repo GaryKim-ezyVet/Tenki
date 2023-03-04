@@ -1,51 +1,17 @@
-import React, { useState, useEffect } from 'react';
+import * as React from 'react';
 import { SafeAreaView, Image, FlatList } from 'react-native';
-//import useWeather from '../utils/LoadWeather';
-//import loadLocation from '../utils/GlobalLocation';
-import * as Location from 'expo-location';
 import { WeatherDisplay } from '../components/WeatherDisplay';
 import { styles } from '../styles/styles';
+import GetForecast from '../utils/GetForecast';
 
-
-export const openWeatherKey = 'bb481abe6d37c9527b03cf0575897349';
-const base_weather_api_url = 'https://api.openweathermap.org/data/2.5/weather?';
-
-
+//dropdown setting - how to persist this on app close 
+//map make things look prettier
+//main screen weather icon does not load 
+//make things typescript
 
 export default function Applocation() {
 
-  const [globalLat, setglobalLat] = useState(null);
-  const [globalLon, setglobalLon] = useState(null);
-  const [forecast, setForecast] = useState(null);
-
-//will prompt for permission to load location details from the device to generate a lat and lon position
-  useEffect(() => {  
-
-    const loadWeather = async () => {
-
-    //Access permissions to access location services 
-    await Location.requestForegroundPermissionsAsync();
-    
-    let globalPositioning = await Location.getCurrentPositionAsync();
-    setglobalLat(globalPositioning.coords.latitude);
-    setglobalLon(globalPositioning.coords.longitude);
-
-  }; 
-loadWeather();
-},[]);
-  
-
-//if lat and lon values exist pull the API link with current lat and lon to set forecast information 
-  useEffect(() =>{
-    if (globalLat && globalLon) {
-    fetch(`${base_weather_api_url}lat=${globalLat}&lon=${globalLon}&units=metric&APPID=${openWeatherKey}`)
-      .then((res) => res.json())
-      .then((result) => {
-      setForecast(result)
-    })
-  }
-  },[globalLat,globalLon]);
-
+  const forecast = GetForecast();
 
   //return a Flatlist which will load forecast into the Weather display cards if forecast value is not null
   return (
@@ -60,7 +26,8 @@ loadWeather();
         {cityName: forecast?.name, 
           cityTemp:forecast?.main.temp,
           cityWeather:forecast?.weather[0].icon,
-          cityHumidity:forecast?.main.humidity},
+          cityHumidity:forecast?.main.humidity
+        },
         {cityName: 'Christchurch',
           cityTemp: 21,
           cityWeather: '09d',

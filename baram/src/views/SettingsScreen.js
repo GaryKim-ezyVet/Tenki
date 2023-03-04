@@ -1,18 +1,30 @@
-import * as React from 'react';
+import React, {useState} from 'react';
 import {
   Text,
   View,
-  useColorScheme,
-  Appearance
 } from 'react-native';
+import {Picker} from '@react-native-picker/picker';
 
 //load setting screen
 //potential dark theme option
-export default function SettingsScreen() {
+const SettingsScreen = () => {
+
+  const [unit, setUnit] = useState('Celcius °C');
+
   return (
     <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
       <Text>Settings!</Text>
-      <Text>Slider to select C° or F°</Text> 
+      <Picker
+        unit = {unit}
+        onValueChange={(itemValue, itemIndex ) => setUnit(itemValue)}
+      >
+        <Picker.Item label="Degrees Celcius" value="Celcius °C" />
+        <Picker.Item label="Degrees Fahrenheit " value="Fahrenheit °F" />
+      </Picker>
+
+      <Text> The temperature will display in: {unit}</Text>
     </View>
   );
 }
+
+export default SettingsScreen;

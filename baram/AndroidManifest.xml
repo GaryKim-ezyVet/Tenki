@@ -1,5 +1,6 @@
 <manifest ... >
     <application 
+    android:supportsRtl="true"
     android:usesCleartextTraffic="true" 
     ... >
         <activity android:name="com.example.myapp.MainActivity" ... >

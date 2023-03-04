@@ -71,6 +71,26 @@ export const styles = StyleSheet.create({
       width: '100%',
       height: undefined,
       aspectRatio: 0.7,
+    },
+    mapCard:{
+      backgroundColor: 'lightblue',
+      height:100,
+      width:130,
+      marginTop: 160,
+      marginRight: 200,
+      alignItems: 'center',
+    },
+    mapLogo: {
+      width: 150,
+      height: 150,
+      marginTop: 480,
+      justifyContent: 'center', 
+      backgroundColor: 'white'
+    },
+    mapView:{ 
+      flex: 1, 
+      justifyContent: 'center', 
+      alignItems: 'center',
     }
   });
   
