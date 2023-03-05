@@ -47,7 +47,10 @@ export default function Applocation() {
           cityTemp: 6,
           cityWeather: '50n',
           cityHumidity: 30
-        },] : []}
+        },
+      //could I load a function in the data here to then return theese fore units to then use in the Flat list? - this way I can pull the location with the API url then dynamically pull out the information like temp or icon etc
+      ] : []}
+        
       renderItem = {({item}) => <WeatherDisplay cityName={item.cityName} cityTemp={item.cityTemp} cityWeather={item.cityWeather} cityHumidity={item.cityHumidity}/>}
       keyExtractor={(item, index) => index.toString()}
       contentContainerStyle={{padding: 16}}
