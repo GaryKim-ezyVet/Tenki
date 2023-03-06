@@ -1,29 +1,12 @@
-import { useState, useEffect } from 'react';
 import { View, Text } from 'react-native';
 import { Picker as SelectPicker } from '@react-native-picker/picker';
-import AsyncStorage from '@react-native-async-storage/async-storage';
+import GetSettings from '../utils/GetSettings';
 
 export default function SettingsScreen() {
-  const[selectedUnit, setSelectedUnit] = useState('metric');
+  
+  const [selectedUnit, setSelectedUnit] = GetSettings();
 
-  // Load saved value on mount
-  useEffect(() => {
-    async function loadSettings() {
-      const value = await AsyncStorage.getItem('temperatureUnit');
-      if (value) {
-        setSelectedUnit(value);
-      }
-    }
-    loadSettings();
-  }, []);
-
-  // Save selected value on change
-  useEffect(() => {
-    async function saveSettings() {
-      await AsyncStorage.setItem('temperatureUnit', selectedUnit);
-    }
-    saveSettings();
-  }, [selectedUnit]);
+  console.log(selectedUnit);
 
   return (
     <View>

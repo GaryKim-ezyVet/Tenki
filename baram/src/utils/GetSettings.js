@@ -1,27 +1,30 @@
 import React, { useState, useEffect } from 'react';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import GetForecast from './GetForecast';
 
 export default function GetSettings() {
-    const [selectedValue, setSelectedValue] = useState('metric');
+  const[selectedUnit, setSelectedUnit] = useState('metric');
 
-    // Load saved value on mount
-    useEffect(() => {
-      async function loadSettings() {
-        const value = await AsyncStorage.getItem('temperatureUnit');
-        if (value) {
-          setSelectedValue(value);
-        }
+  // Load saved value on mount
+  useEffect(() => {
+    async function loadSettings() {
+      const value = await AsyncStorage.getItem('temperatureUnit');
+      if (value) {
+        setSelectedUnit(value);
       }
-      loadSettings();
-    }, []);
-  
-    // Save selected value on change
-    useEffect(() => {
-      async function saveSettings() {
-        await AsyncStorage.setItem('temperatureUnit', selectedValue);
-      }
-      saveSettings();
-    }, [selectedValue]);
+    }
+    loadSettings();
+  }, []);
 
-  return selectedValue;
+  // Save selected value on change
+  useEffect(() => {
+    async function saveSettings() {
+      await AsyncStorage.setItem('temperatureUnit', selectedUnit);
+    }
+    saveSettings();
+  }, [selectedUnit]);
+
+  return [selectedUnit, setSelectedUnit];
 }
+
+

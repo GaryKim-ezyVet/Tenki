@@ -1,15 +1,20 @@
 
 import React, { useState, useEffect } from 'react';
 import * as Location from 'expo-location';
+import GetSettings from './GetSettings';
 
 export const openWeatherKey = 'bb481abe6d37c9527b03cf0575897349';
 const base_weather_api_url = 'https://api.openweathermap.org/data/2.5/weather?';
 
+
 export default function GetForecast() {
 
 const [globalLat, setglobalLat] = useState(null);
-  const [globalLon, setglobalLon] = useState(null);
-  const [forecast, setForecast] = useState(null);
+const [globalLon, setglobalLon] = useState(null);
+const [forecast, setForecast] = useState(null);  
+const [selectedUnit, setSelectedUnit] = useState('metric');
+
+console.log('Forecast: ',selectedUnit);
 
   useEffect(() => {  
     const loadWeather = async () => {
@@ -26,7 +31,7 @@ const [globalLat, setglobalLat] = useState(null);
   useEffect(() =>{
     if (globalLat && globalLon) {
       // Load weather data from OpenWeather API using current lat and lon
-      fetch(`${base_weather_api_url}lat=${globalLat}&lon=${globalLon}&units=metric&APPID=${openWeatherKey}`)
+      fetch(`${base_weather_api_url}lat=${globalLat}&lon=${globalLon}&units=${selectedUnit}&APPID=${openWeatherKey}`)
         .then((res) => res.json())
         .then((result) => {
           setForecast(result)
