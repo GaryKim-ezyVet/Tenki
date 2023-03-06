@@ -1,3 +1,0 @@
-
-export const openWeatherKey = 'bb481abe6d37c9527b03cf0575897349';
-export const base_weather_api_url = 'https://api.openweathermap.org/data/2.5/weather?';

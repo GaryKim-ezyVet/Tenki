@@ -2,13 +2,11 @@ import * as React from 'react';
 import {
     SafeAreaView,
     ImageBackground,
-    Text,
-    Image,
+    FlatList
   } from 'react-native';
 import { styles } from '../styles/styles';
 import GetForecast from '../utils/GetForecast';
-import { Card } from 'react-native-paper';
-
+import { WeatherDisplay } from '../components/WeatherDisplay';
 
 //load Maps
 // fetch(ww3-ecmwf.global);
@@ -16,20 +14,22 @@ export default function MapScreen() {
   const forecast = GetForecast();
 
   return (
-    <ImageBackground source={require('../../assets/New_Zealand_map.png')} style={styles.map}>
-      
-      <SafeAreaView style={styles.mapView}>
-      <Card elevation={3} style={styles.mapCard} >
-        <Text>{forecast?.name}</Text>
-        <Text>{forecast?.main.temp}</Text>
-        <Text>{forecast?.weather[0].main}</Text>
-        <Text>{forecast?.main.humidity}</Text>
-      </Card>
-      <Image 
-      style = {styles.mapLogo}
-      source={require('../../assets/baram-logo.png') } 
-      />
-      </SafeAreaView>
-    </ImageBackground>
+    
+    <SafeAreaView>
+       <FlatList
+        data = {forecast ? [
+          {cityName: forecast?.name, 
+          cityTemp:forecast?.main.temp,
+          cityWeather:forecast?.weather[0].icon,
+          cityHumidity:forecast?.main.humidity
+          },] : []}
+        renderItem = {({item}) => <WeatherDisplay cityName={item.cityName} cityTemp={item.cityTemp} cityWeather={item.cityWeather} cityHumidity={item.cityHumidity}/>}
+        keyExtractor={(item, index) => index.toString()}
+      >
+  
+      </FlatList>
+      <ImageBackground source={require('../../assets/New_Zealand_map.png')} style={styles.map}>
+      </ImageBackground>
+    </SafeAreaView>
   );
 }
