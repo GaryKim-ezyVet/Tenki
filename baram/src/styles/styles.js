@@ -27,8 +27,8 @@ export const styles = StyleSheet.create({
     icons: {
       marginLeft: 'auto',
       marginRight: 'auto',
-      width:0.5,
-      height:0.5,
+      width:50,
+      height:50,
     },
     logo: {
       width: 150,
