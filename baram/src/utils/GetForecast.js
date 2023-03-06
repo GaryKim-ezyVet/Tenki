@@ -1,20 +1,19 @@
 
 import React, { useState, useEffect } from 'react';
 import * as Location from 'expo-location';
-import GetSettings from './GetSettings';
+import GetSettings, {selectedUnit} from './GetSettings';
 
 export const openWeatherKey = 'bb481abe6d37c9527b03cf0575897349';
 const base_weather_api_url = 'https://api.openweathermap.org/data/2.5/weather?';
 
-
 export default function GetForecast() {
+
+//selected unit is undefined currently - once I can call the selectedUnit's updated values here the API result should also update.
+console.log(selectedUnit);
 
 const [globalLat, setglobalLat] = useState(null);
 const [globalLon, setglobalLon] = useState(null);
 const [forecast, setForecast] = useState(null);  
-const [selectedUnit, setSelectedUnit] = useState('metric');
-
-console.log('Forecast: ',selectedUnit);
 
   useEffect(() => {  
     const loadWeather = async () => {
@@ -37,6 +36,7 @@ console.log('Forecast: ',selectedUnit);
           setForecast(result)
         })
     }
-  },[globalLat,globalLon]);
+  },[globalLat,globalLon,selectedUnit]);
+
   return forecast;
 }
