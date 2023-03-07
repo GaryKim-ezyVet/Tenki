@@ -17,9 +17,6 @@ export const WeatherDisplay = ({cityName, cityTemp, cityWeather, cityHumidity}) 
       <View style={styles.container}>
         <View style={styles.column}>
           <Text style={styles.label}>
-            City:
-          </Text>
-          <Text style={styles.values}>
             {cityName ?? 'Finding city'}
           </Text>
         </View>
@@ -38,10 +35,10 @@ export const WeatherDisplay = ({cityName, cityTemp, cityWeather, cityHumidity}) 
           </Text>
         </View>
         <View style={styles.column}>
-          <Text style={styles.label}>
+          <Text style={styles.values}>
             Humidity:
           </Text>
-          <Text style={styles.values}>
+          <Text style={styles.label }>
             {cityHumidity ?? 'Loading'}%
           </Text>
         </View>

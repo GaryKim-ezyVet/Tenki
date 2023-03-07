@@ -1,4 +1,4 @@
-import React, {useContext} from 'react';
+import React, {useEffect, useState} from 'react';
 import * as Location from 'expo-location';
 
 const openWeatherKey = 'bb481abe6d37c9527b03cf0575897349';
@@ -11,8 +11,10 @@ const getLocation = async () => {
   return currentLocation ?? defaultLocation
 }
 
-export default function GetForecast({setForecast}) {
-  const forecast = useContext(ForecastContext);
+//reviewing console log this seems to keep loading
+export default function GetForecast(currentLocation) {
+  const [forecast, setForecast] = useState(null);
+  useEffect = () => {
   getLocation;
   // Load weather data from OpenWeather API using the variables for currentlocation or defaultlocation 
   fetch(`${base_weather_api_url}q=Auckland&units=metric&APPID=${openWeatherKey}`)
@@ -21,4 +23,4 @@ export default function GetForecast({setForecast}) {
       setForecast(result)
     })
     return forecast;
-}
+}, [currentLocation]}
