@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { SafeAreaView, Image, FlatList } from 'react-native';
+import { SafeAreaView, ScrollView, Image, FlatList } from 'react-native';
 import { WeatherDisplay } from '../components/WeatherDisplay';
 import { styles } from '../styles/styles';
 import GetForecast from '../utils/GetForecast';
@@ -11,11 +11,12 @@ import GetForecast from '../utils/GetForecast';
 
 export default function Applocation() {
 
-  const forecast = GetForecast();
+  //loads forecast value from Getforcast function
+  const forecast = GetForecast(forecast);
 
   //return a Flatlist which will load forecast into the Weather display cards if forecast value is not null
   return (
-    <SafeAreaView style={styles.pageTitle}>
+    <ScrollView style={styles.pageTitle}>
       <Image 
       style = {styles.logo}
       source={require('../../assets/baram-logo.png') } 
@@ -57,7 +58,7 @@ export default function Applocation() {
       >
 
       </FlatList>
-    </SafeAreaView>
+    </ScrollView>
   );
   
 }
