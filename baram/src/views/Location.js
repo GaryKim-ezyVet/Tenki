@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { SafeAreaView, ScrollView, Image, FlatList } from 'react-native';
+import { SafeAreaView, Image, FlatList, ScrollView } from 'react-native';
 import { WeatherDisplay } from '../components/WeatherDisplay';
 import { styles } from '../styles/styles';
 import GetForecast from '../utils/GetForecast';
@@ -11,7 +11,6 @@ import GetForecast from '../utils/GetForecast';
 
 export default function Applocation() {
 
-  //loads forecast value from Getforcast function
   const forecast = GetForecast(forecast);
 
   //return a Flatlist which will load forecast into the Weather display cards if forecast value is not null
