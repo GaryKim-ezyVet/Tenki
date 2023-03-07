@@ -1,22 +1,19 @@
 import * as React from 'react';
-import { SafeAreaView, ScrollView, Image, FlatList } from 'react-native';
+import { SafeAreaView, Image, FlatList, ScrollView } from 'react-native';
 import { WeatherDisplay } from '../components/WeatherDisplay';
 import { styles } from '../styles/styles';
 import GetForecast from '../utils/GetForecast';
 
-//dropdown setting - how to persist this on app close 
-//map make things look prettier
 //main screen weather icon does not load 
 //make things typescript
 
 export default function Applocation() {
 
-  //loads forecast value from Getforcast function
   const forecast = GetForecast(forecast);
 
   //return a Flatlist which will load forecast into the Weather display cards if forecast value is not null
   return (
-    <ScrollView style={styles.pageTitle}>
+    <SafeAreaView style={styles.pageTitle}>
       <Image 
       style = {styles.logo}
       source={require('../../assets/baram-logo.png') } 
@@ -25,7 +22,7 @@ export default function Applocation() {
       <FlatList
       data = {forecast ? [
         {cityName: forecast?.name, 
-          cityTemp:forecast?.main.temp,
+          cityTemp:forecast?.main,
           cityWeather:forecast?.weather[0].icon,
           cityHumidity:forecast?.main.humidity
         },
@@ -53,12 +50,13 @@ export default function Applocation() {
       ] : []}
         
       renderItem = {({item}) => <WeatherDisplay cityName={item.cityName} cityTemp={item.cityTemp} cityWeather={item.cityWeather} cityHumidity={item.cityHumidity}/>}
+      //should not use index here id and name combination would be best since index is not unique
       keyExtractor={(item, index) => index.toString()}
       contentContainerStyle={{padding: 16}}
       >
 
       </FlatList>
-    </ScrollView>
+    </SafeAreaView>
   );
   
 }
