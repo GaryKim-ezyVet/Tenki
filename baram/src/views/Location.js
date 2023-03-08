@@ -2,21 +2,19 @@ import * as React from 'react';
 import { SafeAreaView, Image, FlatList, ScrollView } from 'react-native';
 import { WeatherDisplay } from '../components/WeatherDisplay';
 import { styles } from '../styles/styles';
-import GetForecast from '../utils/GetForecast';
-import GetLocation, {currentLocation} from '../utils/GetLocation';
+import GetLocation from '../utils/GetLocation';
 import {cityList} from '../../assets/cityList';
+import CityForecast, {forecastList} from '../utils/CityForecast'
 
 //main screen weather icon does not load 
 //make things typescript
 
 export default function Applocation() {
-  console.log(cityList);  
   //call current location and permissions
   GetLocation();
+  CityForecast();
 
-  console.log('location',currentLocation);
-
-  //return a Flatlist which will load forecast into the Weather display cards if forecast value is not null
+  //return a Flatlist value of Flatlist will be from the citylist array
   return (
     <SafeAreaView style={styles.pageTitle}>
       <Image 
@@ -27,7 +25,6 @@ export default function Applocation() {
       <FlatList
       data = {[
         {cityList}
-      //could I load a function in the data here to then return theese fore units to then use in the Flat list? - this way I can pull the location with the API url then dynamically pull out the information like temp or icon etc
       ]}
         
       renderItem = {({item}) => <WeatherDisplay cityName={item.cityName} cityTemp={item.cityTemp} cityWeather={item.cityWeather} cityHumidity={item.cityHumidity}/>}
