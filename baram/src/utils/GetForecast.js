@@ -13,14 +13,11 @@ const getLocation = async () => {
 
 //reviewing console log this seems to keep loading
 export default function GetForecast(currentLocation) {
-  const [forecast, setForecast] = useState(null);
-  useEffect = () => {
   getLocation;
   // Load weather data from OpenWeather API using the variables for currentlocation or defaultlocation 
   fetch(`${base_weather_api_url}q=Auckland&units=metric&APPID=${openWeatherKey}`)
     .then((res) => res.json())
     .then((result) => {
-      setForecast(result)
-    })
-    return forecast;
-}, [currentLocation]}
+      return result
+    })}
+    
