@@ -9,7 +9,12 @@ const defaultLocation = {
 }
 const currentLocation = null;
 
-export default async function GetLocation() {
+/* 
+    Style Comment: 
+    Functions, like variables, are usually camelCase (first letter lowercase)
+    React components should be PascalCase (first letter uppercase)
+*/ 
+export default async function getLocation() {
     await Location.requestForegroundPermissionsAsync();
     let currentLocation = await Location.getCurrentPositionAsync();
     return currentLocation ?? defaultLocation;
