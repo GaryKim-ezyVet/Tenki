@@ -12,5 +12,6 @@ const currentLocation = null;
 export default async function GetLocation() {
     await Location.requestForegroundPermissionsAsync();
     let currentLocation = await Location.getCurrentPositionAsync();
+    console.log(currentLocation);
     return currentLocation ?? defaultLocation;
 }
