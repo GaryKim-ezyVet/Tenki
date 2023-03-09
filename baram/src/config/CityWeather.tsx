@@ -4,3 +4,4 @@ export const base_weather_api_url: string = 'https://api.openweathermap.org/data
 
 const cityUrl: string = `${base_weather_api_url}q=${cityName}/${openWeatherKey}`
 
+// Looks like Work In Progress (WIP) ?

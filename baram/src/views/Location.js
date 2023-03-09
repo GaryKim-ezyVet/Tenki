@@ -14,6 +14,10 @@ export default function Applocation() {
   GetLocation();
   CityForecast();
 
+  /**
+   * make sure you use your hooks to manage state inside a component, and remember to assign the outcome of your functions if you want to use them
+   */
+
   //return a Flatlist value of Flatlist will be from the citylist array
   return (
     <SafeAreaView style={styles.pageTitle}>

@@ -1,6 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import GetForecast from './GetForecast';
+import GetForecast from './GetForecast'; // <-  unused - making sure you tidy up unused imports/variables/etc as you work will help keep your code clean and yourself sane
+
+/* 
+  This is a custom hook (nice) - these should always start with 'use', and where you use it should follow the rules of hooks 
+  https://reactjs.org/docs/hooks-custom.html#extracting-a-custom-hook
+  https://reactjs.org/docs/hooks-rules.html
+*/ 
 
 export default function GetSettings() {
   const[selectedUnit, setSelectedUnit] = useState('metric');

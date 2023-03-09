@@ -1,6 +1,12 @@
 import React from 'react';
 import { StyleSheet } from 'react-native';
 
+/* 
+    Stucture Tip: 
+    You can do `StyleSheet.create` as many times as you want, which means your can do small stylesheets inside your individual component files
+    This can be helpful for knowing what CSS is for which component, and preventing unintended changes. 
+*/ 
+
 export const styles = StyleSheet.create({
     pageTitle: {
       flex: 1,
