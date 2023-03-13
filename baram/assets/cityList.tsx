@@ -1,26 +1,26 @@
-export const cityList: {id: number; cityName: string; lat: number; lon: number;}[] = [
+export const cityList: {id: number; cityName: string; latitude: number; longitude: number;}[] = [
     { 
         id: 1,
         cityName: 'Seoul',
-        lat: 37.566536,
-        lon: 126.977966,
+        latitude: 37.566536,
+        longitude: 126.977966,
     },
     {
         id:2,
         cityName: 'Tokyo',
-        lat:35.689487,
-        lon:139.691711,
+        latitude:35.689487,
+        longitude:139.691711,
     },
     {
         id:3,
         cityName: 'Wellington',
-        lat: -41.286461,
-        lon: 174.776230,
+        latitude: -41.286461,
+        longitude: 174.776230,
     },
     {
         id:4,
         cityName: 'Christchuch',
-        lat: -43.532055,
-        lon: 172.636230, 
+        latitude: -43.532055,
+        longitude: 172.636230, 
     },
 ];

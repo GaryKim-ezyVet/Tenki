@@ -6,8 +6,7 @@ const base_weather_api_url = 'https://api.openweathermap.org/data/2.5/weather?';
 
 export default function GetForecast(cityLatitude,cityLongitude) {
   // Load weather data from OpenWeather API using the variables for currentlocation or defaultlocation 
-  
-  fetch(`${base_weather_api_url}lat=${cityLatitude}&lon=${cityLongitude}&units=metric&APPID=${openWeatherKey}`)
+  return fetch(`${base_weather_api_url}lat=${cityLatitude}&lon=${cityLongitude}&units=metric&APPID=${openWeatherKey}`)
     .then((res) => res.json())
     .then((result) => {
       return result;

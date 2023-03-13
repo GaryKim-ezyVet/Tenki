@@ -1,13 +1,14 @@
 import React from 'react';
-import { cityList } from '../../assets/cityList';
 import GetForecast from './GetForecast';
+import GetLocation from './GetLocation';
 
-export default function CityForecast(cityList) {
-  const forecastList = [];
-  for (const city of cityList) {
-    const forecast = GetForecast(city.lat, city.lon);
-    forecastList.push(forecast);
-
-  }
-};
-
+export default function CityForecast({cityList}) {
+  return GetLocation().then((currentLocation) => {
+    const forecastPromises = [ currentLocation, ...cityList].map((city) =>
+      GetForecast(city.latitude, city.longitude)
+    );
+    return Promise.all(forecastPromises).then((forecastList) => {
+      return forecastList;
+    });
+  });
+}

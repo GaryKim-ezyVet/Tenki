@@ -10,6 +10,7 @@ const openWeatherIconURL = 'https://openweathermap.org/img/wn/';
 //Re-usable component to display weather information per city 
 //props > make sense which parts are grouped together > mental box > they become their own component > pass the data down 
 export const WeatherDisplay = ({cityName, cityTemp, cityWeather, cityHumidity}) => {
+  
   const iconUrl = `${openWeatherIconURL}${cityWeather}.png`;
 
   return(
