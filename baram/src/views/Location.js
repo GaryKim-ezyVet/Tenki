@@ -1,4 +1,4 @@
-import * as React from 'react';
+import React, {useEffect, useState} from 'react';
 import { SafeAreaView, Image, FlatList, ScrollView } from 'react-native';
 import { WeatherDisplay } from '../components/WeatherDisplay';
 import { styles } from '../styles/styles';
@@ -7,16 +7,21 @@ import {cityList} from '../../assets/cityList';
 import CityForecast from '../utils/CityForecast'
 
 //main screen weather icon does not load 
-//make things typescript
 
 export default function Applocation() {
-  //call current location and permissions
+
   GetLocation();
-  
-  //all caps/underscore constant fixed data not a variable 
-  const forecastList = CityForecast(cityList);
-  
-  console.log(forecastList);
+  const [forecastList, setForecastList] = useState([]);
+
+  useEffect(() => {
+    CityForecast({cityList})
+      .then((result) => {
+        setForecastList(result);
+      })
+      .catch((error) => {
+        console.log('Error fetching forecast:', error);
+      });
+  }, []);
 
   //return a Flatlist value of Flatlist will be from the citylist array
   return (
@@ -27,15 +32,15 @@ export default function Applocation() {
       />
 
       <FlatList
-      data = {[
-      ]}
+      data = {
+        forecastList
+      }
         
-      renderItem = {({item}) => <WeatherDisplay cityName={item.cityName} cityTemp={item.cityTemp} cityWeather={item.cityWeather} cityHumidity={item.cityHumidity}/>}
+      renderItem = {({item}) => <WeatherDisplay cityName={item.name} cityTemp={item.main.temp} cityWeather={item.weather[0].icon} cityHumidity={item.main.humidity}/>}
       //should not use index here id and name combination would be best since index is not unique
-      keyExtractor={(item, index) => index.toString()}
+      keyExtractor={(id) => id.toString()}
       contentContainerStyle={{padding: 16}}
       >
-
       </FlatList>
     </SafeAreaView>
   );
