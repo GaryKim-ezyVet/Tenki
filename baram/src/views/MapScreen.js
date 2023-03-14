@@ -1,16 +1,10 @@
 import * as React from 'react';
 import {
     SafeAreaView,
-    ImageBackground,
-    FlatList
+    ImageBackground
   } from 'react-native';
 import { styles } from '../styles/styles';
-import GetForecast from '../utils/GetForecast';
-import { WeatherDisplay } from '../components/WeatherDisplay';
-import GetLocation from '../utils/GetLocation';
-
-export default function MapScreen() {
-
+export default function mapScreen() {
 
   return (
     <SafeAreaView>

@@ -1,11 +1,11 @@
 import React from 'react';
-import GetForecast from './GetForecast';
-import GetLocation from './GetLocation';
+import getForecast from './GetForecast';
+import getLocation from './GetLocation';
 
-export default function CityForecast({cityList}) {
-  return GetLocation().then((currentLocation) => {
+export default function cityForecast({cityList}) {
+  return getLocation().then((currentLocation) => {
     const forecastPromises = [ currentLocation, ...cityList].map((city) =>
-      GetForecast(city.latitude, city.longitude)
+      getForecast(city.latitude, city.longitude)
     );
     return Promise.all(forecastPromises).then((forecastList) => {
       return forecastList;
