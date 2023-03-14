@@ -30,10 +30,8 @@ export default function MainNavigation() {
         <Tab.Navigator
           screenOptions = {createScreenOptions} 
           tabBarOptions={{
-            //set the color of the icons based on whether they are active or inactive 
             tabBarInactiveTintColor: 'gray',
-          }}
-        >
+          }}>
           <Tab.Screen name='Main' component={Location} />
           <Tab.Screen name='Map' component={MapScreen} />
           <Tab.Screen name='Settings' component={SettingsScreen} />
